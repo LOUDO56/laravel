@@ -34,6 +34,7 @@ return [
 
     'formats' => [
         'jsonld' => ['application/ld+json'],
+        'json'   => ['application/json'],
         // 'jsonapi' => ['application/vnd.api+json'],
         // 'csv' => ['text/csv'],
     ],
@@ -142,7 +143,7 @@ return [
     ],
 
     // we recommend using "file" or "acpu"
-    'cache' => 'file',
+    'cache' => env('APP_ENV') === 'testing' ? 'array' : 'file',
 
     // install `api-platform/http-cache`
     // 'http_cache' => [
