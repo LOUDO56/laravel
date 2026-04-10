@@ -1,0 +1,685 @@
+
+   PASS  Tests\Unit\ExampleTest
+  ✓ that true is true                                                    0.01s  
+
+   PASS  Tests\Feature\AuthTest
+  ✓ it can register a new user                                           0.35s  
+  ✓ it cannot register with duplicate email                              0.09s  
+  ✓ it can login with valid credentials                                  0.06s  
+  ✓ it cannot login with wrong password                                  0.24s  
+  ✓ it can access protected route with valid token                       0.04s  
+  ✓ it cannot access protected route without token                       0.04s  
+  ✓ it can logout and token is deleted from database                     0.04s  
+
+   FAIL  Tests\Feature\ClassroomTest
+  ⨯ it admin_school can create classroom in their school                 0.09s  
+  ✓ it teacher cannot create a classroom                                 0.07s  
+  ⨯ it student can view classrooms they belong to                        0.06s  
+
+   PASS  Tests\Feature\ExampleTest
+  ✓ the application returns a successful response                        0.06s  
+
+   FAIL  Tests\Feature\RbacTest
+  ✓ it unauthenticated user cannot access API resources                  0.09s  
+  ✓ it student cannot create subjects                                    0.06s  
+  ✓ it teacher cannot create classrooms                                  0.06s  
+  ⨯ it student cannot delete a content                                   0.05s  
+  ⨯ it teacher can create content in their school subject                0.09s  
+
+   FAIL  Tests\Feature\SchoolTest
+  ⨯ it admin_school can create a school                                  0.08s  
+  ✓ it teacher cannot create a school                                    0.08s  
+  ✓ it student cannot create a school                                    0.05s  
+  ⨯ it admin can update their own school                                 0.04s  
+  ⨯ it admin cannot update another school                                0.04s  
+  ⨯ it can list schools when authenticated                               0.04s  
+
+   PASS  Tests\Feature\TrackingTest
+  ✓ it student can request a segment token for accessible content        0.05s  
+  ✓ it student cannot request token for inaccessible content             0.04s  
+  ✓ it valid token + valid segment updates watched_seconds               0.05s  
+  ✓ it replayed token returns 422                                        0.05s  
+  ✓ it playback_rate > 2.0 returns 422                                   0.05s  
+  ✓ it segment duration > 31 seconds returns 422                         0.04s  
+  ✓ it teacher cannot track viewing progress                             0.04s  
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ClassroomTest > it admin_school can create classroo…   
+  Expected response status code [201] but received 500.
+Failed asserting that 500 is identical to 201.
+
+The following exception occurred during the last request:
+
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: classrooms.name in /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Connection.php:584
+Stack trace:
+#0 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Connection.php(584): PDOStatement->execute()
+#1 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Connection.php(827): Illuminate\Database\Connection->{closure:Illuminate\Database\Connection::statement():573}('insert into "cl...', Array)
+#2 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Connection.php(794): Illuminate\Database\Connection->runQueryCallback('insert into "cl...', Array, Object(Closure))
+#3 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Connection.php(573): Illuminate\Database\Connection->run('insert into "cl...', Array, Object(Closure))
+#4 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Connection.php(537): Illuminate\Database\Connection->statement('insert into "cl...', Array)
+#5 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/Processor.php(32): Illuminate\Database\Connection->insert('insert into "cl...', Array)
+#6 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(4140): Illuminate\Database\Query\Processors\Processor->processInsertGetId(Object(Illuminate\Database\Query\Builder), 'insert into "cl...', Array, 'id')
+#7 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php(2235): Illuminate\Database\Query\Builder->insertGetId(Array, 'id')
+#8 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1436): Illuminate\Database\Eloquent\Builder->__call('insertGetId', Array)
+#9 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1401): Illuminate\Database\Eloquent\Model->insertAndSetId(Object(Illuminate\Database\Eloquent\Builder), Array)
+#10 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1240): Illuminate\Database\Eloquent\Model->performInsert(Object(Illuminate\Database\Eloquent\Builder))
+#11 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1268): Illuminate\Database\Eloquent\Model->save(Array)
+#12 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Concerns/ManagesTransactions.php(35): Illuminate\Database\Eloquent\Model->{closure:Illuminate\Database\Eloquent\Model::saveOrFail():1268}(Object(Illuminate\Database\SQLiteConnection))
+#13 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1268): Illuminate\Database\Connection->transaction(Object(Closure))
+#14 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/laravel/Eloquent/State/PersistProcessor.php(85): Illuminate\Database\Eloquent\Model->saveOrFail()
+#15 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/state/CallableProcessor.php(52): ApiPlatform\Laravel\Eloquent\State\PersistProcessor->process(Object(App\Models\Classroom), Object(ApiPlatform\Metadata\Post), Array, Array)
+#16 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/state/Processor/WriteProcessor.php(58): ApiPlatform\State\CallableProcessor->process(Object(App\Models\Classroom), Object(ApiPlatform\Metadata\Post), Array, Array)
+#17 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/hydra/State/HydraLinkProcessor.php(58): ApiPlatform\State\Processor\WriteProcessor->process(Object(App\Models\Classroom), Object(ApiPlatform\Metadata\Post), Array, Array)
+#18 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/laravel/Controller/ApiPlatformController.php(104): ApiPlatform\Hydra\State\HydraLinkProcessor->process(Object(App\Models\Classroom), Object(ApiPlatform\Metadata\Post), Array, Array)
+#19 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): ApiPlatform\Laravel\Controller\ApiPlatformController->__invoke(Object(Illuminate\Http\Request), '_api_/api/class...', 'App\\Models\\Clas...')
+#20 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(43): Illuminate\Routing\Controller->callAction('__invoke', Array)
+#21 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Route.php(265): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(ApiPlatform\Laravel\Controller\ApiPlatformController), '__invoke')
+#22 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Route.php(211): Illuminate\Routing\Route->runController()
+#23 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(822): Illuminate\Routing\Route->run()
+#24 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Router->{closure:Illuminate\Routing\Router::runRouteWithinStack():821}(Object(Illuminate\Http\Request))
+#25 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(63): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}(Object(Illuminate\Http\Request))
+#26 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\Authenticate->handle(Object(Illuminate\Http\Request), Object(Closure), 'sanctum')
+#27 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/laravel/ApiPlatformMiddleware.php(47): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#28 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): ApiPlatform\Laravel\ApiPlatformMiddleware->handle(Object(Illuminate\Http\Request), Object(Closure), '_api_/api/class...')
+#29 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#30 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#31 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(800): Illuminate\Routing\Router->runRouteWithinStack(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request))
+#32 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(764): Illuminate\Routing\Router->runRoute(Object(Illuminate\Http\Request), Object(Illuminate\Routing\Route))
+#33 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(753): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#34 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#35 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Kernel->{closure:Illuminate\Foundation\Http\Kernel::dispatchToRouter():197}(Object(Illuminate\Http\Request))
+#36 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}(Object(Illuminate\Http\Request))
+#37 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle(Object(Illuminate\Http\Request), Object(Closure))
+#38 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull->handle(Object(Illuminate\Http\Request), Object(Closure))
+#39 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#40 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(51): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle(Object(Illuminate\Http\Request), Object(Closure))
+#41 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\TrimStrings->handle(Object(Illuminate\Http\Request), Object(Closure))
+#42 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#43 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePostSize->handle(Object(Illuminate\Http\Request), Object(Closure))
+#44 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(109): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#45 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance->handle(Object(Illuminate\Http\Request), Object(Closure))
+#46 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(74): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#47 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\HandleCors->handle(Object(Illuminate\Http\Request), Object(Closure))
+#48 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(58): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#49 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\TrustProxies->handle(Object(Illuminate\Http\Request), Object(Closure))
+#50 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php(22): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#51 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks->handle(Object(Illuminate\Http\Request), Object(Closure))
+#52 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePathEncoding.php(26): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#53 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePathEncoding->handle(Object(Illuminate\Http\Request), Object(Closure))
+#54 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#55 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#56 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
+#57 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(607): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#58 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(573): Illuminate\Foundation\Testing\TestCase->call('POST', '/api/classrooms', Array, Array, Array, Array, '{"name":"Classe...')
+#59 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(411): Illuminate\Foundation\Testing\TestCase->json('POST', '/api/classrooms', Array, Array, 0)
+#60 /home/lucas/Documents/MDS_projects/laravel/tests/Feature/ClassroomTest.php(12): Illuminate\Foundation\Testing\TestCase->postJson('/api/classrooms', Array, Array)
+#61 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Factories/TestCaseMethodFactory.php(172): P\Tests\Feature\ClassroomTest->{closure:/home/lucas/Documents/MDS_projects/laravel/tests/Feature/ClassroomTest.php:7}()
+#62 [internal function]: P\Tests\Feature\ClassroomTest->{closure:Pest\Factories\TestCaseMethodFactory::getClosure():162}()
+#63 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Concerns/Testable.php(429): call_user_func_array(Object(Closure), Array)
+#64 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Support/ExceptionTrace.php(26): P\Tests\Feature\ClassroomTest->{closure:Pest\Concerns\Testable::__callClosure():429}()
+#65 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Concerns/Testable.php(429): Pest\Support\ExceptionTrace::ensure(Object(Closure))
+#66 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Concerns/Testable.php(331): P\Tests\Feature\ClassroomTest->__callClosure(Object(Closure), Array)
+#67 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Factories/TestCaseFactory.php(170) : eval()'d code(17): P\Tests\Feature\ClassroomTest->__runTest(Object(Closure))
+#68 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestCase.php(1332): P\Tests\Feature\ClassroomTest->__pest_evaluable_it_admin__school_can_create_classroom_in_their_school()
+#69 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestCase.php(519): PHPUnit\Framework\TestCase->runTest()
+#70 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestRunner/TestRunner.php(99): PHPUnit\Framework\TestCase->runBare()
+#71 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestCase.php(359): PHPUnit\Framework\TestRunner->run(Object(P\Tests\Feature\ClassroomTest))
+#72 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestSuite.php(374): PHPUnit\Framework\TestCase->run()
+#73 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestSuite.php(374): PHPUnit\Framework\TestSuite->run()
+#74 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestSuite.php(374): PHPUnit\Framework\TestSuite->run()
+#75 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/TextUI/TestRunner.php(64): PHPUnit\Framework\TestSuite->run()
+#76 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/TextUI/Application.php(229): PHPUnit\TextUI\TestRunner->run(Object(PHPUnit\TextUI\Configuration\Configuration), Object(PHPUnit\Runner\ResultCache\DefaultResultCache), Object(PHPUnit\Framework\TestSuite))
+#77 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Kernel.php(103): PHPUnit\TextUI\Application->run(Array)
+#78 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/bin/pest(184): Pest\Kernel->handle(Array, Array)
+#79 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/bin/pest(192): {closure:/home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/bin/pest:18}()
+#80 {main}
+
+Next Illuminate\Database\QueryException: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: classrooms.name (Connection: sqlite, Database: :memory:, SQL: insert into "classrooms" ("updated_at", "created_at") values (2026-04-13 08:07:33, 2026-04-13 08:07:33)) in /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Connection.php:838
+Stack trace:
+#0 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Connection.php(794): Illuminate\Database\Connection->runQueryCallback('insert into "cl...', Array, Object(Closure))
+#1 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Connection.php(573): Illuminate\Database\Connection->run('insert into "cl...', Array, Object(Closure))
+#2 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Connection.php(537): Illuminate\Database\Connection->statement('insert into "cl...', Array)
+#3 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/Processor.php(32): Illuminate\Database\Connection->insert('insert into "cl...', Array)
+#4 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(4140): Illuminate\Database\Query\Processors\Processor->processInsertGetId(Object(Illuminate\Database\Query\Builder), 'insert into "cl...', Array, 'id')
+#5 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php(2235): Illuminate\Database\Query\Builder->insertGetId(Array, 'id')
+#6 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1436): Illuminate\Database\Eloquent\Builder->__call('insertGetId', Array)
+#7 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1401): Illuminate\Database\Eloquent\Model->insertAndSetId(Object(Illuminate\Database\Eloquent\Builder), Array)
+#8 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1240): Illuminate\Database\Eloquent\Model->performInsert(Object(Illuminate\Database\Eloquent\Builder))
+#9 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1268): Illuminate\Database\Eloquent\Model->save(Array)
+#10 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Concerns/ManagesTransactions.php(35): Illuminate\Database\Eloquent\Model->{closure:Illuminate\Database\Eloquent\Model::saveOrFail():1268}(Object(Illuminate\Database\SQLiteConnection))
+#11 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1268): Illuminate\Database\Connection->transaction(Object(Closure))
+#12 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/laravel/Eloquent/State/PersistProcessor.php(85): Illuminate\Database\Eloquent\Model->saveOrFail()
+#13 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/state/CallableProcessor.php(52): ApiPlatform\Laravel\Eloquent\State\PersistProcessor->process(Object(App\Models\Classroom), Object(ApiPlatform\Metadata\Post), Array, Array)
+#14 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/state/Processor/WriteProcessor.php(58): ApiPlatform\State\CallableProcessor->process(Object(App\Models\Classroom), Object(ApiPlatform\Metadata\Post), Array, Array)
+#15 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/hydra/State/HydraLinkProcessor.php(58): ApiPlatform\State\Processor\WriteProcessor->process(Object(App\Models\Classroom), Object(ApiPlatform\Metadata\Post), Array, Array)
+#16 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/laravel/Controller/ApiPlatformController.php(104): ApiPlatform\Hydra\State\HydraLinkProcessor->process(Object(App\Models\Classroom), Object(ApiPlatform\Metadata\Post), Array, Array)
+#17 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): ApiPlatform\Laravel\Controller\ApiPlatformController->__invoke(Object(Illuminate\Http\Request), '_api_/api/class...', 'App\\Models\\Clas...')
+#18 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(43): Illuminate\Routing\Controller->callAction('__invoke', Array)
+#19 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Route.php(265): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(ApiPlatform\Laravel\Controller\ApiPlatformController), '__invoke')
+#20 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Route.php(211): Illuminate\Routing\Route->runController()
+#21 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(822): Illuminate\Routing\Route->run()
+#22 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Router->{closure:Illuminate\Routing\Router::runRouteWithinStack():821}(Object(Illuminate\Http\Request))
+#23 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(63): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}(Object(Illuminate\Http\Request))
+#24 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\Authenticate->handle(Object(Illuminate\Http\Request), Object(Closure), 'sanctum')
+#25 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/laravel/ApiPlatformMiddleware.php(47): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#26 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): ApiPlatform\Laravel\ApiPlatformMiddleware->handle(Object(Illuminate\Http\Request), Object(Closure), '_api_/api/class...')
+#27 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#28 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#29 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(800): Illuminate\Routing\Router->runRouteWithinStack(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request))
+#30 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(764): Illuminate\Routing\Router->runRoute(Object(Illuminate\Http\Request), Object(Illuminate\Routing\Route))
+#31 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(753): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#32 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#33 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Kernel->{closure:Illuminate\Foundation\Http\Kernel::dispatchToRouter():197}(Object(Illuminate\Http\Request))
+#34 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}(Object(Illuminate\Http\Request))
+#35 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle(Object(Illuminate\Http\Request), Object(Closure))
+#36 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull->handle(Object(Illuminate\Http\Request), Object(Closure))
+#37 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#38 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(51): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle(Object(Illuminate\Http\Request), Object(Closure))
+#39 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\TrimStrings->handle(Object(Illuminate\Http\Request), Object(Closure))
+#40 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#41 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePostSize->handle(Object(Illuminate\Http\Request), Object(Closure))
+#42 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(109): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#43 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance->handle(Object(Illuminate\Http\Request), Object(Closure))
+#44 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(74): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#45 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\HandleCors->handle(Object(Illuminate\Http\Request), Object(Closure))
+#46 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(58): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#47 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\TrustProxies->handle(Object(Illuminate\Http\Request), Object(Closure))
+#48 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php(22): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#49 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks->handle(Object(Illuminate\Http\Request), Object(Closure))
+#50 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePathEncoding.php(26): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#51 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePathEncoding->handle(Object(Illuminate\Http\Request), Object(Closure))
+#52 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#53 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#54 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
+#55 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(607): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#56 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(573): Illuminate\Foundation\Testing\TestCase->call('POST', '/api/classrooms', Array, Array, Array, Array, '{"name":"Classe...')
+#57 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(411): Illuminate\Foundation\Testing\TestCase->json('POST', '/api/classrooms', Array, Array, 0)
+#58 /home/lucas/Documents/MDS_projects/laravel/tests/Feature/ClassroomTest.php(12): Illuminate\Foundation\Testing\TestCase->postJson('/api/classrooms', Array, Array)
+#59 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Factories/TestCaseMethodFactory.php(172): P\Tests\Feature\ClassroomTest->{closure:/home/lucas/Documents/MDS_projects/laravel/tests/Feature/ClassroomTest.php:7}()
+#60 [internal function]: P\Tests\Feature\ClassroomTest->{closure:Pest\Factories\TestCaseMethodFactory::getClosure():162}()
+#61 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Concerns/Testable.php(429): call_user_func_array(Object(Closure), Array)
+#62 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Support/ExceptionTrace.php(26): P\Tests\Feature\ClassroomTest->{closure:Pest\Concerns\Testable::__callClosure():429}()
+#63 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Concerns/Testable.php(429): Pest\Support\ExceptionTrace::ensure(Object(Closure))
+#64 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Concerns/Testable.php(331): P\Tests\Feature\ClassroomTest->__callClosure(Object(Closure), Array)
+#65 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Factories/TestCaseFactory.php(170) : eval()'d code(17): P\Tests\Feature\ClassroomTest->__runTest(Object(Closure))
+#66 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestCase.php(1332): P\Tests\Feature\ClassroomTest->__pest_evaluable_it_admin__school_can_create_classroom_in_their_school()
+#67 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestCase.php(519): PHPUnit\Framework\TestCase->runTest()
+#68 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestRunner/TestRunner.php(99): PHPUnit\Framework\TestCase->runBare()
+#69 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestCase.php(359): PHPUnit\Framework\TestRunner->run(Object(P\Tests\Feature\ClassroomTest))
+#70 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestSuite.php(374): PHPUnit\Framework\TestCase->run()
+#71 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestSuite.php(374): PHPUnit\Framework\TestSuite->run()
+#72 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestSuite.php(374): PHPUnit\Framework\TestSuite->run()
+#73 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/TextUI/TestRunner.php(64): PHPUnit\Framework\TestSuite->run()
+#74 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/TextUI/Application.php(229): PHPUnit\TextUI\TestRunner->run(Object(PHPUnit\TextUI\Configuration\Configuration), Object(PHPUnit\Runner\ResultCache\DefaultResultCache), Object(PHPUnit\Framework\TestSuite))
+#75 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Kernel.php(103): PHPUnit\TextUI\Application->run(Array)
+#76 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/bin/pest(184): Pest\Kernel->handle(Array, Array)
+#77 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/bin/pest(192): {closure:/home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/bin/pest:18}()
+#78 {main}
+
+----------------------------------------------------------------------------------
+
+SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: classrooms.name (Connection: sqlite, Database: :memory:, SQL: insert into "classrooms" ("updated_at", "created_at") values (2026-04-13 08:07:33, 2026-04-13 08:07:33))
+
+  at tests/Feature/ClassroomTest.php:15
+     11▕     $this->actingAs($admin, 'sanctum')
+     12▕          ->postJson('/api/classrooms', [
+     13▕              'name'      => 'Classe B3-01',
+     14▕              'school_id' => $school->id,
+  ➜  15▕          ], ['Content-Type' => 'application/ld+json', 'Accept' => 'application/ld+json'])->assertStatus(201);
+     16▕ });
+     17▕ 
+     18▕ it('teacher cannot create a classroom', function () {
+     19▕     $school  = School::factory()->create();
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ClassroomTest > it student can view classrooms they…   
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/ClassroomTest.php:37
+     33▕     $classroom->users()->attach($student->id, ['role_in_class' => 'student']);
+     34▕ 
+     35▕     $this->actingAs($student, 'sanctum')
+     36▕          ->getJson("/api/classrooms/{$classroom->id}")
+  ➜  37▕          ->assertOk();
+     38▕ });
+     39▕
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\RbacTest > it student cannot delete a content          
+  Expected response status code [403] but received 404.
+Failed asserting that 404 is identical to 403.
+
+  at tests/Feature/RbacTest.php:47
+     43▕     $content = Content::factory()->create(['subject_id' => $subject->id, 'teacher_id' => $teacher->id]);
+     44▕ 
+     45▕     $this->actingAs($student, 'sanctum')
+     46▕          ->deleteJson("/api/contents/{$content->id}", [], ['Accept' => 'application/ld+json'])
+  ➜  47▕          ->assertStatus(403);
+     48▕ });
+     49▕ 
+     50▕ it('teacher can create content in their school subject', function () {
+     51▕     $school    = School::factory()->create();
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\RbacTest > it teacher can create content in their s…   
+  Expected response status code [201] but received 500.
+Failed asserting that 500 is identical to 201.
+
+The following exception occurred during the last request:
+
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: contents.subject_id in /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Connection.php:584
+Stack trace:
+#0 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Connection.php(584): PDOStatement->execute()
+#1 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Connection.php(827): Illuminate\Database\Connection->{closure:Illuminate\Database\Connection::statement():573}('insert into "co...', Array)
+#2 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Connection.php(794): Illuminate\Database\Connection->runQueryCallback('insert into "co...', Array, Object(Closure))
+#3 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Connection.php(573): Illuminate\Database\Connection->run('insert into "co...', Array, Object(Closure))
+#4 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Connection.php(537): Illuminate\Database\Connection->statement('insert into "co...', Array)
+#5 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/Processor.php(32): Illuminate\Database\Connection->insert('insert into "co...', Array)
+#6 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(4140): Illuminate\Database\Query\Processors\Processor->processInsertGetId(Object(Illuminate\Database\Query\Builder), 'insert into "co...', Array, 'id')
+#7 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php(2235): Illuminate\Database\Query\Builder->insertGetId(Array, 'id')
+#8 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1436): Illuminate\Database\Eloquent\Builder->__call('insertGetId', Array)
+#9 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1401): Illuminate\Database\Eloquent\Model->insertAndSetId(Object(Illuminate\Database\Eloquent\Builder), Array)
+#10 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1240): Illuminate\Database\Eloquent\Model->performInsert(Object(Illuminate\Database\Eloquent\Builder))
+#11 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1268): Illuminate\Database\Eloquent\Model->save(Array)
+#12 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Concerns/ManagesTransactions.php(35): Illuminate\Database\Eloquent\Model->{closure:Illuminate\Database\Eloquent\Model::saveOrFail():1268}(Object(Illuminate\Database\SQLiteConnection))
+#13 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1268): Illuminate\Database\Connection->transaction(Object(Closure))
+#14 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/laravel/Eloquent/State/PersistProcessor.php(85): Illuminate\Database\Eloquent\Model->saveOrFail()
+#15 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/state/CallableProcessor.php(52): ApiPlatform\Laravel\Eloquent\State\PersistProcessor->process(Object(App\Models\Content), Object(ApiPlatform\Metadata\Post), Array, Array)
+#16 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/state/Processor/WriteProcessor.php(58): ApiPlatform\State\CallableProcessor->process(Object(App\Models\Content), Object(ApiPlatform\Metadata\Post), Array, Array)
+#17 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/hydra/State/HydraLinkProcessor.php(58): ApiPlatform\State\Processor\WriteProcessor->process(Object(App\Models\Content), Object(ApiPlatform\Metadata\Post), Array, Array)
+#18 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/laravel/Controller/ApiPlatformController.php(104): ApiPlatform\Hydra\State\HydraLinkProcessor->process(Object(App\Models\Content), Object(ApiPlatform\Metadata\Post), Array, Array)
+#19 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): ApiPlatform\Laravel\Controller\ApiPlatformController->__invoke(Object(Illuminate\Http\Request), '_api_/api/conte...', 'App\\Models\\Cont...')
+#20 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(43): Illuminate\Routing\Controller->callAction('__invoke', Array)
+#21 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Route.php(265): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(ApiPlatform\Laravel\Controller\ApiPlatformController), '__invoke')
+#22 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Route.php(211): Illuminate\Routing\Route->runController()
+#23 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(822): Illuminate\Routing\Route->run()
+#24 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Router->{closure:Illuminate\Routing\Router::runRouteWithinStack():821}(Object(Illuminate\Http\Request))
+#25 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(63): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}(Object(Illuminate\Http\Request))
+#26 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\Authenticate->handle(Object(Illuminate\Http\Request), Object(Closure), 'sanctum')
+#27 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/laravel/ApiPlatformMiddleware.php(47): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#28 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): ApiPlatform\Laravel\ApiPlatformMiddleware->handle(Object(Illuminate\Http\Request), Object(Closure), '_api_/api/conte...')
+#29 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#30 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#31 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(800): Illuminate\Routing\Router->runRouteWithinStack(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request))
+#32 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(764): Illuminate\Routing\Router->runRoute(Object(Illuminate\Http\Request), Object(Illuminate\Routing\Route))
+#33 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(753): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#34 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#35 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Kernel->{closure:Illuminate\Foundation\Http\Kernel::dispatchToRouter():197}(Object(Illuminate\Http\Request))
+#36 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}(Object(Illuminate\Http\Request))
+#37 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle(Object(Illuminate\Http\Request), Object(Closure))
+#38 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull->handle(Object(Illuminate\Http\Request), Object(Closure))
+#39 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#40 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(51): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle(Object(Illuminate\Http\Request), Object(Closure))
+#41 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\TrimStrings->handle(Object(Illuminate\Http\Request), Object(Closure))
+#42 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#43 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePostSize->handle(Object(Illuminate\Http\Request), Object(Closure))
+#44 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(109): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#45 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance->handle(Object(Illuminate\Http\Request), Object(Closure))
+#46 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(74): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#47 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\HandleCors->handle(Object(Illuminate\Http\Request), Object(Closure))
+#48 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(58): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#49 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\TrustProxies->handle(Object(Illuminate\Http\Request), Object(Closure))
+#50 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php(22): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#51 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks->handle(Object(Illuminate\Http\Request), Object(Closure))
+#52 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePathEncoding.php(26): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#53 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePathEncoding->handle(Object(Illuminate\Http\Request), Object(Closure))
+#54 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#55 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#56 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
+#57 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(607): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#58 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(573): Illuminate\Foundation\Testing\TestCase->call('POST', '/api/contents', Array, Array, Array, Array, '{"subject_id":1...')
+#59 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(411): Illuminate\Foundation\Testing\TestCase->json('POST', '/api/contents', Array, Array, 0)
+#60 /home/lucas/Documents/MDS_projects/laravel/tests/Feature/RbacTest.php(59): Illuminate\Foundation\Testing\TestCase->postJson('/api/contents', Array, Array)
+#61 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Factories/TestCaseMethodFactory.php(172): P\Tests\Feature\RbacTest->{closure:/home/lucas/Documents/MDS_projects/laravel/tests/Feature/RbacTest.php:50}()
+#62 [internal function]: P\Tests\Feature\RbacTest->{closure:Pest\Factories\TestCaseMethodFactory::getClosure():162}()
+#63 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Concerns/Testable.php(429): call_user_func_array(Object(Closure), Array)
+#64 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Support/ExceptionTrace.php(26): P\Tests\Feature\RbacTest->{closure:Pest\Concerns\Testable::__callClosure():429}()
+#65 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Concerns/Testable.php(429): Pest\Support\ExceptionTrace::ensure(Object(Closure))
+#66 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Concerns/Testable.php(331): P\Tests\Feature\RbacTest->__callClosure(Object(Closure), Array)
+#67 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Factories/TestCaseFactory.php(170) : eval()'d code(53): P\Tests\Feature\RbacTest->__runTest(Object(Closure))
+#68 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestCase.php(1332): P\Tests\Feature\RbacTest->__pest_evaluable_it_teacher_can_create_content_in_their_school_subject()
+#69 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestCase.php(519): PHPUnit\Framework\TestCase->runTest()
+#70 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestRunner/TestRunner.php(99): PHPUnit\Framework\TestCase->runBare()
+#71 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestCase.php(359): PHPUnit\Framework\TestRunner->run(Object(P\Tests\Feature\RbacTest))
+#72 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestSuite.php(374): PHPUnit\Framework\TestCase->run()
+#73 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestSuite.php(374): PHPUnit\Framework\TestSuite->run()
+#74 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestSuite.php(374): PHPUnit\Framework\TestSuite->run()
+#75 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/TextUI/TestRunner.php(64): PHPUnit\Framework\TestSuite->run()
+#76 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/TextUI/Application.php(229): PHPUnit\TextUI\TestRunner->run(Object(PHPUnit\TextUI\Configuration\Configuration), Object(PHPUnit\Runner\ResultCache\DefaultResultCache), Object(PHPUnit\Framework\TestSuite))
+#77 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Kernel.php(103): PHPUnit\TextUI\Application->run(Array)
+#78 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/bin/pest(184): Pest\Kernel->handle(Array, Array)
+#79 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/bin/pest(192): {closure:/home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/bin/pest:18}()
+#80 {main}
+
+Next Illuminate\Database\QueryException: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: contents.subject_id (Connection: sqlite, Database: :memory:, SQL: insert into "contents" ("updated_at", "created_at") values (2026-04-13 08:07:34, 2026-04-13 08:07:34)) in /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Connection.php:838
+Stack trace:
+#0 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Connection.php(794): Illuminate\Database\Connection->runQueryCallback('insert into "co...', Array, Object(Closure))
+#1 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Connection.php(573): Illuminate\Database\Connection->run('insert into "co...', Array, Object(Closure))
+#2 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Connection.php(537): Illuminate\Database\Connection->statement('insert into "co...', Array)
+#3 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/Processor.php(32): Illuminate\Database\Connection->insert('insert into "co...', Array)
+#4 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(4140): Illuminate\Database\Query\Processors\Processor->processInsertGetId(Object(Illuminate\Database\Query\Builder), 'insert into "co...', Array, 'id')
+#5 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php(2235): Illuminate\Database\Query\Builder->insertGetId(Array, 'id')
+#6 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1436): Illuminate\Database\Eloquent\Builder->__call('insertGetId', Array)
+#7 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1401): Illuminate\Database\Eloquent\Model->insertAndSetId(Object(Illuminate\Database\Eloquent\Builder), Array)
+#8 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1240): Illuminate\Database\Eloquent\Model->performInsert(Object(Illuminate\Database\Eloquent\Builder))
+#9 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1268): Illuminate\Database\Eloquent\Model->save(Array)
+#10 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Concerns/ManagesTransactions.php(35): Illuminate\Database\Eloquent\Model->{closure:Illuminate\Database\Eloquent\Model::saveOrFail():1268}(Object(Illuminate\Database\SQLiteConnection))
+#11 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1268): Illuminate\Database\Connection->transaction(Object(Closure))
+#12 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/laravel/Eloquent/State/PersistProcessor.php(85): Illuminate\Database\Eloquent\Model->saveOrFail()
+#13 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/state/CallableProcessor.php(52): ApiPlatform\Laravel\Eloquent\State\PersistProcessor->process(Object(App\Models\Content), Object(ApiPlatform\Metadata\Post), Array, Array)
+#14 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/state/Processor/WriteProcessor.php(58): ApiPlatform\State\CallableProcessor->process(Object(App\Models\Content), Object(ApiPlatform\Metadata\Post), Array, Array)
+#15 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/hydra/State/HydraLinkProcessor.php(58): ApiPlatform\State\Processor\WriteProcessor->process(Object(App\Models\Content), Object(ApiPlatform\Metadata\Post), Array, Array)
+#16 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/laravel/Controller/ApiPlatformController.php(104): ApiPlatform\Hydra\State\HydraLinkProcessor->process(Object(App\Models\Content), Object(ApiPlatform\Metadata\Post), Array, Array)
+#17 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): ApiPlatform\Laravel\Controller\ApiPlatformController->__invoke(Object(Illuminate\Http\Request), '_api_/api/conte...', 'App\\Models\\Cont...')
+#18 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(43): Illuminate\Routing\Controller->callAction('__invoke', Array)
+#19 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Route.php(265): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(ApiPlatform\Laravel\Controller\ApiPlatformController), '__invoke')
+#20 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Route.php(211): Illuminate\Routing\Route->runController()
+#21 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(822): Illuminate\Routing\Route->run()
+#22 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Router->{closure:Illuminate\Routing\Router::runRouteWithinStack():821}(Object(Illuminate\Http\Request))
+#23 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(63): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}(Object(Illuminate\Http\Request))
+#24 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\Authenticate->handle(Object(Illuminate\Http\Request), Object(Closure), 'sanctum')
+#25 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/laravel/ApiPlatformMiddleware.php(47): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#26 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): ApiPlatform\Laravel\ApiPlatformMiddleware->handle(Object(Illuminate\Http\Request), Object(Closure), '_api_/api/conte...')
+#27 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#28 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#29 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(800): Illuminate\Routing\Router->runRouteWithinStack(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request))
+#30 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(764): Illuminate\Routing\Router->runRoute(Object(Illuminate\Http\Request), Object(Illuminate\Routing\Route))
+#31 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(753): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#32 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#33 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Kernel->{closure:Illuminate\Foundation\Http\Kernel::dispatchToRouter():197}(Object(Illuminate\Http\Request))
+#34 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}(Object(Illuminate\Http\Request))
+#35 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle(Object(Illuminate\Http\Request), Object(Closure))
+#36 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull->handle(Object(Illuminate\Http\Request), Object(Closure))
+#37 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#38 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(51): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle(Object(Illuminate\Http\Request), Object(Closure))
+#39 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\TrimStrings->handle(Object(Illuminate\Http\Request), Object(Closure))
+#40 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#41 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePostSize->handle(Object(Illuminate\Http\Request), Object(Closure))
+#42 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(109): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#43 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance->handle(Object(Illuminate\Http\Request), Object(Closure))
+#44 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(74): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#45 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\HandleCors->handle(Object(Illuminate\Http\Request), Object(Closure))
+#46 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(58): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#47 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\TrustProxies->handle(Object(Illuminate\Http\Request), Object(Closure))
+#48 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php(22): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#49 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks->handle(Object(Illuminate\Http\Request), Object(Closure))
+#50 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePathEncoding.php(26): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#51 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePathEncoding->handle(Object(Illuminate\Http\Request), Object(Closure))
+#52 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#53 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#54 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
+#55 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(607): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#56 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(573): Illuminate\Foundation\Testing\TestCase->call('POST', '/api/contents', Array, Array, Array, Array, '{"subject_id":1...')
+#57 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(411): Illuminate\Foundation\Testing\TestCase->json('POST', '/api/contents', Array, Array, 0)
+#58 /home/lucas/Documents/MDS_projects/laravel/tests/Feature/RbacTest.php(59): Illuminate\Foundation\Testing\TestCase->postJson('/api/contents', Array, Array)
+#59 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Factories/TestCaseMethodFactory.php(172): P\Tests\Feature\RbacTest->{closure:/home/lucas/Documents/MDS_projects/laravel/tests/Feature/RbacTest.php:50}()
+#60 [internal function]: P\Tests\Feature\RbacTest->{closure:Pest\Factories\TestCaseMethodFactory::getClosure():162}()
+#61 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Concerns/Testable.php(429): call_user_func_array(Object(Closure), Array)
+#62 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Support/ExceptionTrace.php(26): P\Tests\Feature\RbacTest->{closure:Pest\Concerns\Testable::__callClosure():429}()
+#63 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Concerns/Testable.php(429): Pest\Support\ExceptionTrace::ensure(Object(Closure))
+#64 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Concerns/Testable.php(331): P\Tests\Feature\RbacTest->__callClosure(Object(Closure), Array)
+#65 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Factories/TestCaseFactory.php(170) : eval()'d code(53): P\Tests\Feature\RbacTest->__runTest(Object(Closure))
+#66 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestCase.php(1332): P\Tests\Feature\RbacTest->__pest_evaluable_it_teacher_can_create_content_in_their_school_subject()
+#67 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestCase.php(519): PHPUnit\Framework\TestCase->runTest()
+#68 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestRunner/TestRunner.php(99): PHPUnit\Framework\TestCase->runBare()
+#69 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestCase.php(359): PHPUnit\Framework\TestRunner->run(Object(P\Tests\Feature\RbacTest))
+#70 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestSuite.php(374): PHPUnit\Framework\TestCase->run()
+#71 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestSuite.php(374): PHPUnit\Framework\TestSuite->run()
+#72 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestSuite.php(374): PHPUnit\Framework\TestSuite->run()
+#73 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/TextUI/TestRunner.php(64): PHPUnit\Framework\TestSuite->run()
+#74 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/TextUI/Application.php(229): PHPUnit\TextUI\TestRunner->run(Object(PHPUnit\TextUI\Configuration\Configuration), Object(PHPUnit\Runner\ResultCache\DefaultResultCache), Object(PHPUnit\Framework\TestSuite))
+#75 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Kernel.php(103): PHPUnit\TextUI\Application->run(Array)
+#76 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/bin/pest(184): Pest\Kernel->handle(Array, Array)
+#77 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/bin/pest(192): {closure:/home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/bin/pest:18}()
+#78 {main}
+
+----------------------------------------------------------------------------------
+
+SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: contents.subject_id (Connection: sqlite, Database: :memory:, SQL: insert into "contents" ("updated_at", "created_at") values (2026-04-13 08:07:34, 2026-04-13 08:07:34))
+
+  at tests/Feature/RbacTest.php:63
+     59▕          ->postJson('/api/contents', [
+     60▕              'subject_id' => $subject->id,
+     61▕              'title'      => 'Introduction',
+     62▕              'video_url'  => 'https://www.youtube.com/watch?v=abc123',
+  ➜  63▕          ], ['Content-Type' => 'application/ld+json', 'Accept' => 'application/ld+json'])->assertStatus(201);
+     64▕ });
+     65▕
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\SchoolTest > it admin_school can create a school       
+  Expected response status code [201] but received 500.
+Failed asserting that 500 is identical to 201.
+
+The following exception occurred during the last request:
+
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: schools.name in /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Connection.php:584
+Stack trace:
+#0 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Connection.php(584): PDOStatement->execute()
+#1 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Connection.php(827): Illuminate\Database\Connection->{closure:Illuminate\Database\Connection::statement():573}('insert into "sc...', Array)
+#2 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Connection.php(794): Illuminate\Database\Connection->runQueryCallback('insert into "sc...', Array, Object(Closure))
+#3 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Connection.php(573): Illuminate\Database\Connection->run('insert into "sc...', Array, Object(Closure))
+#4 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Connection.php(537): Illuminate\Database\Connection->statement('insert into "sc...', Array)
+#5 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/Processor.php(32): Illuminate\Database\Connection->insert('insert into "sc...', Array)
+#6 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(4140): Illuminate\Database\Query\Processors\Processor->processInsertGetId(Object(Illuminate\Database\Query\Builder), 'insert into "sc...', Array, 'id')
+#7 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php(2235): Illuminate\Database\Query\Builder->insertGetId(Array, 'id')
+#8 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1436): Illuminate\Database\Eloquent\Builder->__call('insertGetId', Array)
+#9 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1401): Illuminate\Database\Eloquent\Model->insertAndSetId(Object(Illuminate\Database\Eloquent\Builder), Array)
+#10 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1240): Illuminate\Database\Eloquent\Model->performInsert(Object(Illuminate\Database\Eloquent\Builder))
+#11 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1268): Illuminate\Database\Eloquent\Model->save(Array)
+#12 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Concerns/ManagesTransactions.php(35): Illuminate\Database\Eloquent\Model->{closure:Illuminate\Database\Eloquent\Model::saveOrFail():1268}(Object(Illuminate\Database\SQLiteConnection))
+#13 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1268): Illuminate\Database\Connection->transaction(Object(Closure))
+#14 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/laravel/Eloquent/State/PersistProcessor.php(85): Illuminate\Database\Eloquent\Model->saveOrFail()
+#15 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/state/CallableProcessor.php(52): ApiPlatform\Laravel\Eloquent\State\PersistProcessor->process(Object(App\Models\School), Object(ApiPlatform\Metadata\Post), Array, Array)
+#16 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/state/Processor/WriteProcessor.php(58): ApiPlatform\State\CallableProcessor->process(Object(App\Models\School), Object(ApiPlatform\Metadata\Post), Array, Array)
+#17 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/hydra/State/HydraLinkProcessor.php(58): ApiPlatform\State\Processor\WriteProcessor->process(Object(App\Models\School), Object(ApiPlatform\Metadata\Post), Array, Array)
+#18 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/laravel/Controller/ApiPlatformController.php(104): ApiPlatform\Hydra\State\HydraLinkProcessor->process(Object(App\Models\School), Object(ApiPlatform\Metadata\Post), Array, Array)
+#19 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): ApiPlatform\Laravel\Controller\ApiPlatformController->__invoke(Object(Illuminate\Http\Request), '_api_/api/schoo...', 'App\\Models\\Scho...')
+#20 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(43): Illuminate\Routing\Controller->callAction('__invoke', Array)
+#21 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Route.php(265): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(ApiPlatform\Laravel\Controller\ApiPlatformController), '__invoke')
+#22 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Route.php(211): Illuminate\Routing\Route->runController()
+#23 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(822): Illuminate\Routing\Route->run()
+#24 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Router->{closure:Illuminate\Routing\Router::runRouteWithinStack():821}(Object(Illuminate\Http\Request))
+#25 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(63): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}(Object(Illuminate\Http\Request))
+#26 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\Authenticate->handle(Object(Illuminate\Http\Request), Object(Closure), 'sanctum')
+#27 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/laravel/ApiPlatformMiddleware.php(47): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#28 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): ApiPlatform\Laravel\ApiPlatformMiddleware->handle(Object(Illuminate\Http\Request), Object(Closure), '_api_/api/schoo...')
+#29 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#30 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#31 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(800): Illuminate\Routing\Router->runRouteWithinStack(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request))
+#32 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(764): Illuminate\Routing\Router->runRoute(Object(Illuminate\Http\Request), Object(Illuminate\Routing\Route))
+#33 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(753): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#34 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#35 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Kernel->{closure:Illuminate\Foundation\Http\Kernel::dispatchToRouter():197}(Object(Illuminate\Http\Request))
+#36 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}(Object(Illuminate\Http\Request))
+#37 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle(Object(Illuminate\Http\Request), Object(Closure))
+#38 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull->handle(Object(Illuminate\Http\Request), Object(Closure))
+#39 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#40 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(51): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle(Object(Illuminate\Http\Request), Object(Closure))
+#41 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\TrimStrings->handle(Object(Illuminate\Http\Request), Object(Closure))
+#42 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#43 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePostSize->handle(Object(Illuminate\Http\Request), Object(Closure))
+#44 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(109): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#45 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance->handle(Object(Illuminate\Http\Request), Object(Closure))
+#46 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(74): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#47 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\HandleCors->handle(Object(Illuminate\Http\Request), Object(Closure))
+#48 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(58): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#49 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\TrustProxies->handle(Object(Illuminate\Http\Request), Object(Closure))
+#50 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php(22): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#51 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks->handle(Object(Illuminate\Http\Request), Object(Closure))
+#52 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePathEncoding.php(26): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#53 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePathEncoding->handle(Object(Illuminate\Http\Request), Object(Closure))
+#54 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#55 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#56 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
+#57 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(607): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#58 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(573): Illuminate\Foundation\Testing\TestCase->call('POST', '/api/schools', Array, Array, Array, Array, '{"name":"New Sc...')
+#59 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(411): Illuminate\Foundation\Testing\TestCase->json('POST', '/api/schools', Array, Array, 0)
+#60 /home/lucas/Documents/MDS_projects/laravel/tests/Feature/SchoolTest.php(10): Illuminate\Foundation\Testing\TestCase->postJson('/api/schools', Array, Array)
+#61 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Factories/TestCaseMethodFactory.php(172): P\Tests\Feature\SchoolTest->{closure:/home/lucas/Documents/MDS_projects/laravel/tests/Feature/SchoolTest.php:6}()
+#62 [internal function]: P\Tests\Feature\SchoolTest->{closure:Pest\Factories\TestCaseMethodFactory::getClosure():162}()
+#63 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Concerns/Testable.php(429): call_user_func_array(Object(Closure), Array)
+#64 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Support/ExceptionTrace.php(26): P\Tests\Feature\SchoolTest->{closure:Pest\Concerns\Testable::__callClosure():429}()
+#65 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Concerns/Testable.php(429): Pest\Support\ExceptionTrace::ensure(Object(Closure))
+#66 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Concerns/Testable.php(331): P\Tests\Feature\SchoolTest->__callClosure(Object(Closure), Array)
+#67 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Factories/TestCaseFactory.php(170) : eval()'d code(17): P\Tests\Feature\SchoolTest->__runTest(Object(Closure))
+#68 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestCase.php(1332): P\Tests\Feature\SchoolTest->__pest_evaluable_it_admin__school_can_create_a_school()
+#69 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestCase.php(519): PHPUnit\Framework\TestCase->runTest()
+#70 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestRunner/TestRunner.php(99): PHPUnit\Framework\TestCase->runBare()
+#71 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestCase.php(359): PHPUnit\Framework\TestRunner->run(Object(P\Tests\Feature\SchoolTest))
+#72 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestSuite.php(374): PHPUnit\Framework\TestCase->run()
+#73 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestSuite.php(374): PHPUnit\Framework\TestSuite->run()
+#74 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestSuite.php(374): PHPUnit\Framework\TestSuite->run()
+#75 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/TextUI/TestRunner.php(64): PHPUnit\Framework\TestSuite->run()
+#76 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/TextUI/Application.php(229): PHPUnit\TextUI\TestRunner->run(Object(PHPUnit\TextUI\Configuration\Configuration), Object(PHPUnit\Runner\ResultCache\DefaultResultCache), Object(PHPUnit\Framework\TestSuite))
+#77 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Kernel.php(103): PHPUnit\TextUI\Application->run(Array)
+#78 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/bin/pest(184): Pest\Kernel->handle(Array, Array)
+#79 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/bin/pest(192): {closure:/home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/bin/pest:18}()
+#80 {main}
+
+Next Illuminate\Database\QueryException: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: schools.name (Connection: sqlite, Database: :memory:, SQL: insert into "schools" ("updated_at", "created_at") values (2026-04-13 08:07:34, 2026-04-13 08:07:34)) in /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Connection.php:838
+Stack trace:
+#0 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Connection.php(794): Illuminate\Database\Connection->runQueryCallback('insert into "sc...', Array, Object(Closure))
+#1 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Connection.php(573): Illuminate\Database\Connection->run('insert into "sc...', Array, Object(Closure))
+#2 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Connection.php(537): Illuminate\Database\Connection->statement('insert into "sc...', Array)
+#3 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/Processor.php(32): Illuminate\Database\Connection->insert('insert into "sc...', Array)
+#4 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(4140): Illuminate\Database\Query\Processors\Processor->processInsertGetId(Object(Illuminate\Database\Query\Builder), 'insert into "sc...', Array, 'id')
+#5 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php(2235): Illuminate\Database\Query\Builder->insertGetId(Array, 'id')
+#6 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1436): Illuminate\Database\Eloquent\Builder->__call('insertGetId', Array)
+#7 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1401): Illuminate\Database\Eloquent\Model->insertAndSetId(Object(Illuminate\Database\Eloquent\Builder), Array)
+#8 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1240): Illuminate\Database\Eloquent\Model->performInsert(Object(Illuminate\Database\Eloquent\Builder))
+#9 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1268): Illuminate\Database\Eloquent\Model->save(Array)
+#10 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Concerns/ManagesTransactions.php(35): Illuminate\Database\Eloquent\Model->{closure:Illuminate\Database\Eloquent\Model::saveOrFail():1268}(Object(Illuminate\Database\SQLiteConnection))
+#11 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1268): Illuminate\Database\Connection->transaction(Object(Closure))
+#12 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/laravel/Eloquent/State/PersistProcessor.php(85): Illuminate\Database\Eloquent\Model->saveOrFail()
+#13 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/state/CallableProcessor.php(52): ApiPlatform\Laravel\Eloquent\State\PersistProcessor->process(Object(App\Models\School), Object(ApiPlatform\Metadata\Post), Array, Array)
+#14 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/state/Processor/WriteProcessor.php(58): ApiPlatform\State\CallableProcessor->process(Object(App\Models\School), Object(ApiPlatform\Metadata\Post), Array, Array)
+#15 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/hydra/State/HydraLinkProcessor.php(58): ApiPlatform\State\Processor\WriteProcessor->process(Object(App\Models\School), Object(ApiPlatform\Metadata\Post), Array, Array)
+#16 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/laravel/Controller/ApiPlatformController.php(104): ApiPlatform\Hydra\State\HydraLinkProcessor->process(Object(App\Models\School), Object(ApiPlatform\Metadata\Post), Array, Array)
+#17 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): ApiPlatform\Laravel\Controller\ApiPlatformController->__invoke(Object(Illuminate\Http\Request), '_api_/api/schoo...', 'App\\Models\\Scho...')
+#18 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(43): Illuminate\Routing\Controller->callAction('__invoke', Array)
+#19 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Route.php(265): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(ApiPlatform\Laravel\Controller\ApiPlatformController), '__invoke')
+#20 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Route.php(211): Illuminate\Routing\Route->runController()
+#21 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(822): Illuminate\Routing\Route->run()
+#22 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Router->{closure:Illuminate\Routing\Router::runRouteWithinStack():821}(Object(Illuminate\Http\Request))
+#23 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(63): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}(Object(Illuminate\Http\Request))
+#24 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Auth\Middleware\Authenticate->handle(Object(Illuminate\Http\Request), Object(Closure), 'sanctum')
+#25 /home/lucas/Documents/MDS_projects/laravel/vendor/api-platform/laravel/ApiPlatformMiddleware.php(47): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#26 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): ApiPlatform\Laravel\ApiPlatformMiddleware->handle(Object(Illuminate\Http\Request), Object(Closure), '_api_/api/schoo...')
+#27 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#28 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(821): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#29 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(800): Illuminate\Routing\Router->runRouteWithinStack(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request))
+#30 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(764): Illuminate\Routing\Router->runRoute(Object(Illuminate\Http\Request), Object(Illuminate\Routing\Route))
+#31 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(753): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#32 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#33 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Kernel->{closure:Illuminate\Foundation\Http\Kernel::dispatchToRouter():197}(Object(Illuminate\Http\Request))
+#34 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}(Object(Illuminate\Http\Request))
+#35 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle(Object(Illuminate\Http\Request), Object(Closure))
+#36 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull->handle(Object(Illuminate\Http\Request), Object(Closure))
+#37 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#38 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(51): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle(Object(Illuminate\Http\Request), Object(Closure))
+#39 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\TrimStrings->handle(Object(Illuminate\Http\Request), Object(Closure))
+#40 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#41 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePostSize->handle(Object(Illuminate\Http\Request), Object(Closure))
+#42 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(109): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#43 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance->handle(Object(Illuminate\Http\Request), Object(Closure))
+#44 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(74): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#45 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\HandleCors->handle(Object(Illuminate\Http\Request), Object(Closure))
+#46 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(58): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#47 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\TrustProxies->handle(Object(Illuminate\Http\Request), Object(Closure))
+#48 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php(22): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#49 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks->handle(Object(Illuminate\Http\Request), Object(Closure))
+#50 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePathEncoding.php(26): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#51 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(219): Illuminate\Http\Middleware\ValidatePathEncoding->handle(Object(Illuminate\Http\Request), Object(Closure))
+#52 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Pipeline\Pipeline->{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#53 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#54 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
+#55 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(607): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#56 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(573): Illuminate\Foundation\Testing\TestCase->call('POST', '/api/schools', Array, Array, Array, Array, '{"name":"New Sc...')
+#57 /home/lucas/Documents/MDS_projects/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(411): Illuminate\Foundation\Testing\TestCase->json('POST', '/api/schools', Array, Array, 0)
+#58 /home/lucas/Documents/MDS_projects/laravel/tests/Feature/SchoolTest.php(10): Illuminate\Foundation\Testing\TestCase->postJson('/api/schools', Array, Array)
+#59 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Factories/TestCaseMethodFactory.php(172): P\Tests\Feature\SchoolTest->{closure:/home/lucas/Documents/MDS_projects/laravel/tests/Feature/SchoolTest.php:6}()
+#60 [internal function]: P\Tests\Feature\SchoolTest->{closure:Pest\Factories\TestCaseMethodFactory::getClosure():162}()
+#61 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Concerns/Testable.php(429): call_user_func_array(Object(Closure), Array)
+#62 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Support/ExceptionTrace.php(26): P\Tests\Feature\SchoolTest->{closure:Pest\Concerns\Testable::__callClosure():429}()
+#63 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Concerns/Testable.php(429): Pest\Support\ExceptionTrace::ensure(Object(Closure))
+#64 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Concerns/Testable.php(331): P\Tests\Feature\SchoolTest->__callClosure(Object(Closure), Array)
+#65 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Factories/TestCaseFactory.php(170) : eval()'d code(17): P\Tests\Feature\SchoolTest->__runTest(Object(Closure))
+#66 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestCase.php(1332): P\Tests\Feature\SchoolTest->__pest_evaluable_it_admin__school_can_create_a_school()
+#67 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestCase.php(519): PHPUnit\Framework\TestCase->runTest()
+#68 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestRunner/TestRunner.php(99): PHPUnit\Framework\TestCase->runBare()
+#69 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestCase.php(359): PHPUnit\Framework\TestRunner->run(Object(P\Tests\Feature\SchoolTest))
+#70 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestSuite.php(374): PHPUnit\Framework\TestCase->run()
+#71 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestSuite.php(374): PHPUnit\Framework\TestSuite->run()
+#72 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/Framework/TestSuite.php(374): PHPUnit\Framework\TestSuite->run()
+#73 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/TextUI/TestRunner.php(64): PHPUnit\Framework\TestSuite->run()
+#74 /home/lucas/Documents/MDS_projects/laravel/vendor/phpunit/phpunit/src/TextUI/Application.php(229): PHPUnit\TextUI\TestRunner->run(Object(PHPUnit\TextUI\Configuration\Configuration), Object(PHPUnit\Runner\ResultCache\DefaultResultCache), Object(PHPUnit\Framework\TestSuite))
+#75 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/src/Kernel.php(103): PHPUnit\TextUI\Application->run(Array)
+#76 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/bin/pest(184): Pest\Kernel->handle(Array, Array)
+#77 /home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/bin/pest(192): {closure:/home/lucas/Documents/MDS_projects/laravel/vendor/pestphp/pest/bin/pest:18}()
+#78 {main}
+
+----------------------------------------------------------------------------------
+
+SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: schools.name (Connection: sqlite, Database: :memory:, SQL: insert into "schools" ("updated_at", "created_at") values (2026-04-13 08:07:34, 2026-04-13 08:07:34))
+
+  at tests/Feature/SchoolTest.php:13
+      9▕     $this->actingAs($admin, 'sanctum')
+     10▕          ->postJson('/api/schools', [
+     11▕              'name'        => 'New School',
+     12▕              'description' => 'A great school',
+  ➜  13▕          ], ['Content-Type' => 'application/ld+json', 'Accept' => 'application/ld+json'])->assertStatus(201);
+     14▕ 
+     15▕     $this->assertDatabaseHas('schools', ['name' => 'New School']);
+     16▕ });
+     17▕
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\SchoolTest > it admin can update their own school      
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/SchoolTest.php:42
+     38▕     $this->actingAs($admin, 'sanctum')
+     39▕          ->patchJson("/api/schools/{$school->id}", ['name' => 'Updated'], [
+     40▕              'Content-Type' => 'application/merge-patch+json',
+     41▕              'Accept'       => 'application/ld+json',
+  ➜  42▕          ])->assertOk();
+     43▕ });
+     44▕ 
+     45▕ it('admin cannot update another school', function () {
+     46▕     $school1 = School::factory()->create();
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\SchoolTest > it admin cannot update another school     
+  Expected response status code [403] but received 404.
+Failed asserting that 404 is identical to 403.
+
+  at tests/Feature/SchoolTest.php:54
+     50▕     $this->actingAs($admin, 'sanctum')
+     51▕          ->patchJson("/api/schools/{$school2->id}", ['name' => 'Hack'], [
+     52▕              'Content-Type' => 'application/merge-patch+json',
+     53▕              'Accept'       => 'application/ld+json',
+  ➜  54▕          ])->assertStatus(403);
+     55▕ });
+     56▕ 
+     57▕ it('can list schools when authenticated', function () {
+     58▕     School::factory()->count(3)->create();
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\SchoolTest > it can list schools when authenticated    
+  Failed asserting that an array has the key 'hydra:member'.
+
+  at tests/Feature/SchoolTest.php:64
+     60▕ 
+     61▕     $this->actingAs($user, 'sanctum')
+     62▕          ->getJson('/api/schools')
+     63▕          ->assertOk()
+  ➜  64▕          ->assertJsonStructure(['hydra:member']);
+     65▕ });
+     66▕
+
+
+  Tests:    8 failed, 22 passed (48 assertions)
+  Duration: 2.21s
+
